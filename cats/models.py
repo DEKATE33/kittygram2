@@ -29,6 +29,15 @@ class Cat(models.Model):
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        # unique_together = ('name', 'owner')
+        constraints = [
+            models.UniqueConstraint(
+                fields=('owner', 'name'), # Возможно нужен не кортеж а список
+                name='unique_name_owner'
+            )
+        ]
 
 
 class AchievementCat(models.Model):
